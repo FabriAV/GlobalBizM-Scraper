@@ -1,0 +1,12 @@
+{
+    "actorSpecification": 1,
+    "name": "global-business-marketplace-scraper",
+    "title": "GlobalBizM Data Scraper",
+    "description": "Scraper for GlobalBizM.com that extracts detailed business listings data: business title, description, pricing, revenue, cash flow, location, contact information, listing URL, images, and selling reasons.",
+    "version": "0.0",
+    "meta": {
+        "templateId": "js-crawlee-playwright-chrome"
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "../Dockerfile"
+}
