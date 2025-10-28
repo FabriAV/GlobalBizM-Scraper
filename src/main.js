@@ -81,6 +81,7 @@ const crawler = new PlaywrightCrawler({
             });
             if (ids.length === 0) {
                 console.log("⚠️ No results were found on this page");
+                console.log("\n✨ Scraping finished!")
                 break;
             } else {
                 if (numberPage === 1) console.log("\n📝 PROGRESS");
@@ -114,6 +115,7 @@ const crawler = new PlaywrightCrawler({
                     contactEmail: format(data.contactEmail),
                     contactPhone: format(data.contactPhone),
                     sellingReason: format(data.sellingReason).replace(/<[^>]*>/g, "").replace(/\n/g, " ").trim(),
+                    scrapedTimestamp: new Date().toISOString()
                 }
 
                 await pushData(result)

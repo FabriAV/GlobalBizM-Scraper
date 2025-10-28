@@ -6,38 +6,24 @@ Automate your research on **GlobalBizM.com** with this simple scraper. Perfect f
 
 ## ⚡ Why use this crawler?
 
-- **Save hours of manual research**: Get accurate data from hundreds of listings in minutes.
-- **Fully automated pagination**: Crawl all pages without intervention.
-- **Flexible item limits**: Control exactly how many listings to extract.
+### 📊 Complete Business Data (15+ Fields)
+- **Business Essentials**: Title, description, industry category, established year
+- **Financial Metrics**: Asking price, gross revenue, cash flow, currency
+- **Location Details**: City, state, country information
+- **Contact Information**: Broker name, email, phone number
+- **Additional Insights**: Selling reason, primary business image, listing URL
+- **Timestamps**: Date and time of extraction of each commercial record
 
----
+### 🔍 Smart Filtering Features
+- **Geographic Segmentation**: Focus on specific countries and regions
+- **Industry Focus**: Target specific business sectors and categories
+- **Volume Control**: Control exactly how much business you want to extract
 
-## 📋 Features
+### 📊 Data Applications
 
-- **PlaywrightCrawler**: navigates pages and extracts business IDs from listings.  
-- **API data fetching**: uses `fetch` to get full business details from GlobalBizM API.  
-- **Automatic pagination**: goes through all listing pages automatically.  
-- **Resource blocking**: skips images and stylesheets to speed up navigation.   
-- **Configurable input**: set `startUrls`, `maxItems`, `country`, and `industry`.  
-
----
-
-## 🔍 Data Extracted  
-
-Each business registration includes:
-
-- Listing URL  
-- Business title  
-- Category / Industry  
-- Asking Price
-- Revenue and Cash Flow  
-- Location (City, State, Country)  
-- Primary Image URL 
-- Established Year
-- Currency
-- Short Description  
-- Contact information (name, email, phone)  
-- Selling Reason  
+**Financial Analysis**: Evaluate selling prices based on revenue and cash flow metrics.
+**Geographic Insights**: Identify markets and regions with high opportunity.
+**Industry Trends**: Track industry-specific pricing and availability.
 
 ---
 
@@ -54,22 +40,35 @@ Each business registration includes:
 ## 📤 Output
 ```json
 {
-	"url": "https://globalbizm.com/business/business-details?businessId=51782",
-	"title": "Consistently Profitable Home Healthcare Agency",
-	"PrimaryImage": "https://gbm-prod.fra1.digitaloceanspaces.com/business/e9b71117-bcc9-4daf-acb9-b77086b61225.jpeg",
-	"description": "This established well-established home healthcare agency is a great opportunity for someone to get started in this high growth industry or for an existing agency to expand market share and services. Seller is looking for the best fit and is extremely...",
-	"category": "Health and Medical",
-	"askingPrice": 325000,
-	"grossRevenue": 1325140,
-	"cashFlow": 153587,
+	"url": "https://globalbizm.com/business/business-details?businessId=51786",
+	"title": "Natural Pet supply & Canine Rehab center",
+	"PrimaryImage": "https://gbm-prod.fra1.digitaloceanspaces.com/business/1d253cee-2270-4ba6-a1f9-8a1474fe37cd.jpg",
+	"description": "Available for acquisition is a natural pet retail store and canine rehabilitation center offering a curated selection of natural pet foods, treats, supplements, grooming products, and accessories for both dogs and cats, with an emphasis on biological...",
+	"category": "Pet Services",
+	"askingPrice": 195000,
+	"grossRevenue": 442646,
+	"cashFlow": 133341,
 	"currency": "USD",
-	"establishedYear": 2012,
-	"city": "Undisclosed",
-	"state": "Michigan",
+	"establishedYear": 2015,
+	"city": "Atlanta",
+	"state": "Georgia",
 	"country": "United States",
 	"contactName": "Undisclosed",
-	"contactEmail": "brad@abb-businessbrokers.com",
-	"contactPhone": "2699038143",
-	"sellingReason": "• This business was a part of an acquisition, and the company is looking for a good fit transition as this business is outside their core offerings • Seller wants to find the best fit to continue quality service to the clients, community and employees"
+	"contactEmail": "info@sbgbrokers.com",
+	"contactPhone": "7708144466",
+	"sellingReason": "Relocating out of state",
+	"scrapedTimestamp": "2025-10-28T17:57:42.894Z"
 }
 ```
+
+---
+
+## 🛠️ Technical Details
+
+- **Technology**: Node.js, Crawlee, PlaywrightCrawler, JavaScript
+- **Data Source**: Direct API integration with GlobalBizM backend
+- **Browser**: Navigation via Playwright
+- **Performance Optimization**: Resource blocking (images, stylesheets) for faster execution
+- **Pagination**: Automatic pagination for unlimited data collection
+- **Dual-phase process**: page navigation + API fetching
+- **Configuration**: Flexible input parameters (maxItems, country, industry)

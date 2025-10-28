@@ -27,7 +27,8 @@
                             "state",
                             "country",
                             "sellingReason",
-                            "url"
+                            "url",
+                            "scrapedTimestamp"
                         ]
                     },
                     "display": {
@@ -72,6 +73,10 @@
                             "url": {
                                 "label": "View Business",
                                 "format": "link"
+                            },
+                            "scrapedTimestamp": {
+                                "label": "Scraped Date",
+                                "format": "date"
                             }
                         }
                     }
@@ -89,7 +94,8 @@
                             "currency",
                             "establishedYear",
                             "sellingReason",
-                            "url"
+                            "url",
+                            "scrapedTimestamp"
                         ]
                     },
                     "display": {
@@ -130,6 +136,10 @@
                             "url": {
                                 "label": "View Business",
                                 "format": "link"
+                            },
+                            "scrapedTimestamp": {
+                                "label": "Scraped Date",
+                                "format": "date"
                             }
                         }
                     }
@@ -147,7 +157,8 @@
                             "contactName",
                             "contactEmail",
                             "contactPhone",
-                            "url"
+                            "url",
+                            "scrapedTimestamp" 
                         ]
                     },
                     "display": {
@@ -188,6 +199,10 @@
                             "url": {
                                 "label": "View Business",
                                 "format": "link"
+                            },
+                            "scrapedTimestamp": {
+                                "label": "Scraped Date",
+                                "format": "date"
                             }
                         }
                     }
