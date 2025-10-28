@@ -1,6 +1,6 @@
 # 🏢 Global Business Marketplace Scraper  
 
-Automated scraper for **GlobalBizM.com** that extracts **complete business listing information** quickly and reliably. Perfect for investors, analysts, or business brokers looking to gather structured data from businesses for sale.  
+Automate your research on **GlobalBizM.com** with this simple scraper. Perfect for **investors and analysts** looking for business opportunities. Select a **country and sector** to find companies for sale, run it, and get organized results in minutes, no programming skills required.
 
 ---
 
@@ -8,7 +8,6 @@ Automated scraper for **GlobalBizM.com** that extracts **complete business listi
 
 - **Save hours of manual research**: Get accurate data from hundreds of listings in minutes.
 - **Fully automated pagination**: Crawl all pages without intervention.
-- **Avoid website detection**: Built-in random user agents and resource blocking.
 - **Flexible item limits**: Control exactly how many listings to extract.
 
 ---
@@ -39,7 +38,6 @@ Each business registration includes:
 - Short Description  
 - Contact information (name, email, phone)  
 - Selling Reason  
-- Extracted Timestamp (ISO-8601)  
 
 ---
 
@@ -47,10 +45,9 @@ Each business registration includes:
 
 ```json
 {
-  "startUrls": ["https://globalbizm.com/business/businesses-for-sale"],
   "maxItems": 100,
-  "country": "All industries",
-  "industry": "Select Industry"
+  "country": "Select Country",
+  "industry": "All industries"
 }
 ```
 

@@ -10,9 +10,11 @@ const userAgentList = [
 
 await Actor.init();
 
-const { startUrls = ['https://globalbizm.com/business/businesses-for-sale'], maxItems, country, industry } = (await Actor.getInput()) ?? {};
+const { maxItems, country, industry } = (await Actor.getInput()) ?? {};
+const startUrl = ['https://globalbizm.com/business/businesses-for-sale'];
 
 let itemsProcessed = 0;
+let numberPage = 0;
 
 function format(value) {
     const newValue = (value === null || value === 0 || value === "") ? "Undisclosed" : value;
@@ -48,6 +50,7 @@ const crawler = new PlaywrightCrawler({
     },
 
     async requestHandler({ pushData, page }) {
+        console.log("\n🔍 SEARCHS FILTERS\n\n🌍 Selected Country: " + country + "\n🎯 Selected Industry: " + industry)
         if (country !== 'Select Country') {
             const countryInput = 'div[role="combobox"] input';
             await page.waitForSelector(countryInput);
@@ -55,15 +58,18 @@ const crawler = new PlaywrightCrawler({
             await page.fill(countryInput, country);
             await page.waitForTimeout(1000);
             await page.keyboard.press('Enter');
+            console.log("✅ Country filter applied");
         }
 
         if (industry !== 'All Industries') {
             await page.click('ng-select[placeholder="All Industries"]');
             await page.click(`text="${industry}"`);
             await page.waitForTimeout(1000);
+            console.log("✅ Industry filter applied");
         }
 
         while (itemsProcessed < maxItems) {
+            numberPage++;
             await page.waitForSelector('.row.rowspaceline.pb-3.respshadow');
             const ids = await page.$$eval('.row.rowspaceline.pb-3.respshadow', (s) => {
                 return s.map(n => {
@@ -73,12 +79,16 @@ const crawler = new PlaywrightCrawler({
                     }
                 });
             });
-            if(ids.length === 0){
-                console.log("No results found on this page.");
-                break; 
+            if (ids.length === 0) {
+                console.log("⚠️ No results were found on this page");
+                break;
+            } else {
+                if (numberPage === 1) console.log("\n📝 PROGRESS");
+                console.log("\n📌 Page Number: " + numberPage + " || Found Businesses: " + ids.length)
             }
 
             const limitedData = ids.slice(0, maxItems - itemsProcessed);
+            console.log("🔄 Processing " + limitedData.length + " businesses from this page...");
 
             for (const business of limitedData) {
                 const res = await fetch("https://api.globalbizm.com/api/business/" + business.id,
@@ -104,37 +114,39 @@ const crawler = new PlaywrightCrawler({
                     contactEmail: format(data.contactEmail),
                     contactPhone: format(data.contactPhone),
                     sellingReason: format(data.sellingReason).replace(/<[^>]*>/g, "").replace(/\n/g, " ").trim(),
-                    scrapedTime: new Date().toISOString()
                 }
 
                 await pushData(result)
                 itemsProcessed++
 
-                if (itemsProcessed >= maxItems) {
-                    return;
-                }
-
             }
-
+            console.log("➤ Information was collected from " + limitedData.length + " businesses")
+            if (itemsProcessed >= maxItems) {
+                console.log("\n🎉 COMPLETED: Reached maximum items (" + maxItems + ")");
+                console.log("\n✨ Scraping finished!")
+                return;
+            }
             const nextButton = await page.$('.mat-paginator-navigation-next');
             const isDisabled = await nextButton.getAttribute('disabled');
             if (isDisabled) {
-                console.log("There is no other pagination")
+                console.log("\n⚠️ No more pages available")
+                console.log("✨ Scraping finished! Collected " + itemsProcessed + " of " + maxItems + " requested businesses");
                 break;
             } else {
+                console.log("\n⏭️ Moving to next page...");
                 await nextButton.click();
                 await page.waitForTimeout(2000);
             }
 
         }
+
     }
 
 
 });
 
-await crawler.run(startUrls);
+await crawler.run(startUrl);
 const dataset = await Actor.openDataset();
-await dataset.exportToJSON('OUTPUT.json');
-await dataset.exportToCSV('OUTPUT.csv');
+
 
 await Actor.exit(); 

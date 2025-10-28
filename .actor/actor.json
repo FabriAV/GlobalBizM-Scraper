@@ -1,12 +1,198 @@
 {
     "actorSpecification": 1,
     "name": "global-business-marketplace-scraper",
-    "title": "GlobalBizM Data Scraper",
-    "description": "Scraper for GlobalBizM.com that extracts detailed business listings data: business title, description, pricing, revenue, cash flow, location, contact information, listing URL, images, and selling reasons.",
+    "title": "Global Business Marketplace Scraper",
+    "description": "Automated scraper for GlobalBizM.com that extracts detailed data from businesses for sale, including: company title, brief description, category/industry, asking price, revenue, cash flow, geographic location, contact information, listing URL, images, and reasons for selling.",
     "version": "0.0",
     "meta": {
         "templateId": "js-crawlee-playwright-chrome"
     },
-    "input": "./input_schema.json",
-    "dockerfile": "../Dockerfile"
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Business Listings",
+            "description": "Scraped business listings from GlobalBizM.com",
+            "views": {
+                "overview": {
+                    "title": "Overview",
+                    "description": "Complete overview of business listings",
+                    "transformation": {
+                        "fields": [
+                            "PrimaryImage",
+                            "title",
+                            "description",
+                            "category",
+                            "askingPrice",
+                            "city",
+                            "state",
+                            "country",
+                            "sellingReason",
+                            "url"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "PrimaryImage": {
+                                "label": "Image",
+                                "format": "image"
+                            },
+                            "title": {
+                                "label": "Business Name",
+                                "format": "text"
+                            },
+                            "description": {
+                                "label": "Description",
+                                "format": "text"
+                            },
+                            "category": {
+                                "label": "Industry",
+                                "format": "text"
+                            },
+                            "askingPrice": {
+                                "label": "Asking Price",
+                                "format": "number"
+                            },
+                            "city": {
+                                "label": "City",
+                                "format": "text"
+                            },
+                            "state": {
+                                "label": "State",
+                                "format": "text"
+                            },
+                            "country": {
+                                "label": "Country",
+                                "format": "text"
+                            },
+                            "sellingReason": {
+                                "label": "Reason for Sale",
+                                "format": "text"
+                            },
+                            "url": {
+                                "label": "View Business",
+                                "format": "link"
+                            }
+                        }
+                    }
+                },
+                "financial": {
+                    "title": "Financial Details",
+                    "description": "Financial metrics and pricing information",
+                    "transformation": {
+                        "fields": [
+                            "PrimaryImage",
+                            "title",
+                            "askingPrice",
+                            "grossRevenue",
+                            "cashFlow",
+                            "currency",
+                            "establishedYear",
+                            "sellingReason",
+                            "url"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "PrimaryImage": {
+                                "label": "Image",
+                                "format": "image"
+                            },
+                            "title": {
+                                "label": "Business Name",
+                                "format": "text"
+                            },
+                            "askingPrice": {
+                                "label": "Asking Price",
+                                "format": "number"
+                            },
+                            "grossRevenue": {
+                                "label": "Gross Revenue",
+                                "format": "number"
+                            },
+                            "cashFlow": {
+                                "label": "Cash Flow",
+                                "format": "number"
+                            },
+                            "currency": {
+                                "label": "Currency",
+                                "format": "text"
+                            },
+                            "establishedYear": {
+                                "label": "Est. Year",
+                                "format": "number"
+                            },
+                            "sellingReason": {
+                                "label": "Reason for Sale",
+                                "format": "text"
+                            },
+                            "url": {
+                                "label": "View Business",
+                                "format": "link"
+                            }
+                        }
+                    }
+                },
+                "contactInformation": {
+                    "title": "Contact Information",
+                    "description": "Location and contact details",
+                    "transformation": {
+                        "fields": [
+                            "PrimaryImage",
+                            "title",
+                            "city",
+                            "state",
+                            "country",
+                            "contactName",
+                            "contactEmail",
+                            "contactPhone",
+                            "url"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "PrimaryImage": {
+                                "label": "Image",
+                                "format": "image"
+                            },
+                            "title": {
+                                "label": "Business Name",
+                                "format": "text"
+                            },
+                            "city": {
+                                "label": "City",
+                                "format": "text"
+                            },
+                            "state": {
+                                "label": "State",
+                                "format": "text"
+                            },
+                            "country": {
+                                "label": "Country",
+                                "format": "text"
+                            },
+                            "contactName": {
+                                "label": "Contact Name",
+                                "format": "text"
+                            },
+                            "contactEmail": {
+                                "label": "Email",
+                                "format": "text"
+                            },
+                            "contactPhone": {
+                                "label": "Phone",
+                                "format": "text"
+                            },
+                            "url": {
+                                "label": "View Business",
+                                "format": "link"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

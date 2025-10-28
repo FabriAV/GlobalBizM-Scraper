@@ -3,21 +3,11 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "startUrls": {
-            "title": "Start URLs",
-            "type": "array",
-            "description": "URLs to start with.",
-            "editor": "requestListSources",
-            "prefill": [
-                {
-                    "url": "https://apify.com"
-                }
-            ]
-        },
         "maxItems": {
             "title": "Max Items",
             "type": "integer",
             "description": "Maximum number of items to crawl.",
+            "minimum": 1,
             "default": 100
         },
         "industry": {
